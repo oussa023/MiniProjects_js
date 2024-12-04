@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 12px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button>Add item</button>
+    </div>
+
+    <ul>
+
+    </ul>
+
+    <script>
+        const ul = document.querySelector("ul");
+        const input = document.querySelector("input");
+        const button = document.querySelector("button");
+
+        button.addEventListener("click", () =>{
+            if(input.value.length !== 0){
+                console.log(input.value.length);
+                let value = input.value;
+                input.value = "";
+                const newLi = document.createElement("li");
+                const newSpan = document.createElement("span");
+                const newButton = document.createElement("button");
+                newLi.append(newSpan, newButton);
+                newSpan.textContent = value;
+                newButton.textContent = "Delete";
+                ul.appendChild(newLi).focus();
+                newButton.addEventListener("click", () =>{
+                    newLi.remove();
+                })
+                input.focus();
+            }
+        });
+        window.addEventListener("keypress", function(event) {
+            if(event.keyCode === 13){
+                let value = input.value;
+                input.value = "";
+                const newLi = document.createElement("li");
+                const newSpan = document.createElement("span");
+                const newButton = document.createElement("button");
+                newLi.append(newSpan, newButton);
+                newSpan.textContent = value;
+                newButton.textContent = "Delete";
+                ul.appendChild(newLi);
+                newButton.addEventListener("click", () =>{
+                    newLi.remove();
+                })
+            }
+        });
+    </script>
+  </body>
+</html>
